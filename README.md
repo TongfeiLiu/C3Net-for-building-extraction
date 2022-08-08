@@ -1,3 +1,3 @@
-# C3Net-for-building-segmentation
+# C3Net-for-building-extraction
 
-This is a official implementation for our paper "C3Net: Context-Content Collaboration Network for Building Segmentation".
+This is a official implementation for our paper "C3Net: Context-Content Collaborative Network for Building Extraction".
