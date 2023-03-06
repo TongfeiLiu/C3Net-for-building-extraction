@@ -6,8 +6,8 @@ This is a PyTorch implementation for our paper "[Context-content collaborative n
 >python  
 pytorch  
 opencv-python=4.1.0.25  
-scikit-image
-scikit-learn 
+scikit-image  
+scikit-learn   
 tqdm  
 
 ## Usage
