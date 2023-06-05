@@ -61,7 +61,8 @@ class CPSCNet(nn.Module):
 
         context = self.ContextAM(x)
         aspp = self.aspp(x)
-        content = self.ContentAM(context, aspp)
+        content = self.ContentAM(x, aspp)
+        # content = self.ContentAM(context, aspp) # You can also try this solution.
 
         alpha = self.sigmoid(self.gamma)
         x = alpha * context + (1 - alpha) * content
