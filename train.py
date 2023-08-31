@@ -19,7 +19,7 @@ from tqdm import tqdm
 #
 def train_net(net, device, data_path, val_path, ModelName='CPSCNet_out1_BCE_out2_Dice', epochs=100, batch_size=2, lr=0.0001):
     # print(net)
-    # 加载数据集
+    # Load dataset
     isbi_dataset = ISBI_Loader(data_path, transform=Transforms.ToTensor())
     train_loader = data.DataLoader(dataset=isbi_dataset,
                                    batch_size=batch_size,
@@ -32,7 +32,7 @@ def train_net(net, device, data_path, val_path, ModelName='CPSCNet_out1_BCE_out2
     BCE_loss = nn.BCELoss()
     f_loss = open('train_loss.txt', 'w')
     f_time = open('train_time.txt', 'w')
-    # 训练epochs次
+    # Start training epochs
     for epoch in range(epochs):
         net.train()
 
@@ -48,7 +48,7 @@ def train_net(net, device, data_path, val_path, ModelName='CPSCNet_out1_BCE_out2
 
                 pred1, pred, out = net(image)
 
-                # 计算loss
+                # compute loss
                 bce_Loss = BCE_loss(pred1, label)
                 dice_Loss = dice_loss(pred, label)
                 loss = 0.5 * bce_Loss + 0.5 * dice_Loss
@@ -115,9 +115,9 @@ def val(net, device, epoc, val_DataPath):
 
             pred1, pred, out = net(val_img)
 
-            # 提取结果
+            # acquire result
             pred = np.array(pred.data.cpu()[0])[0]
-            # 处理结果
+            # binary map
             pred[pred >= 0.5] = 255
             pred[pred < 0.5] = 0
             monfusion_matrix = Evaluation(label=val_label, pred=pred)
